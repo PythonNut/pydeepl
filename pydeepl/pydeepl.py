@@ -61,7 +61,8 @@ class TranslationError(Exception):
         super(TranslationError, self).__init__(message)
 
 
-def translate(text, to_lang, from_lang='auto', json=False):
+def translate(text, to_lang, from_lang='auto', json=False,
+              raw_en_context_after=[], raw_en_context_before=[]):
     if text is None:
         raise TranslationError('Text can\'t be None.')
     if len(text) > 5000:
@@ -79,8 +80,8 @@ def translate(text, to_lang, from_lang='auto', json=False):
                 {
                     'kind':'default',
                     'quality': 'fast',
-                    'raw_en_context_after': [],
-                    'raw_en_context_before': [],
+                    'raw_en_context_after': raw_en_context_after,
+                    'raw_en_context_before': raw_en_context_before,
                     'raw_en_sentence': text
                 }
             ],

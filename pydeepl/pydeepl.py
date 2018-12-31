@@ -1,4 +1,5 @@
 import requests
+import time
 
 BASE_URL = 'https://www2.deepl.com/jsonrpc'
 
@@ -77,6 +78,9 @@ def translate(text, to_lang, from_lang='auto', json=False):
             'jobs': [
                 {
                     'kind':'default',
+                    'quality': 'fast',
+                    'raw_en_context_after': [],
+                    'raw_en_context_before': [],
                     'raw_en_sentence': text
                 }
             ],
@@ -88,6 +92,8 @@ def translate(text, to_lang, from_lang='auto', json=False):
                 'source_lang_user_selected': from_lang,
                 'target_lang': to_lang
             },
+            'priority': -1,
+            'timestamp': int(time.time())
         },
     }
 
